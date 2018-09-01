@@ -21,11 +21,12 @@ public final class Solution {
     public static void main(final String[] args) {
         Scanner scan = new Scanner(System.in);
         int[][] matrix = takingInput(scan);
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[0].length; j++) {
+        int i, j;
+        for (i = 0; i < matrix.length; i++) {
+            for (j = 0; j < matrix[0].length-1; j++) {
                 System.out.print(matrix[i][j] + " ");
             }
-            System.out.println();
+            System.out.println(matrix[i][j]);
         }
     }
     /**
