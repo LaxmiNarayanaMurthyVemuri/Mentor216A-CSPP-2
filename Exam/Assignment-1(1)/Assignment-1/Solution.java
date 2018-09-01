@@ -22,11 +22,10 @@ public final class Solution {
         for (i = 2; i <= n; i++) {
             if (isOdd(i)) {
                 if (isComposite(i)) {
-                    temp += i + ", ";
+                    System.out.println(i);
                 }
             }
         }
-        System.out.println(temp.substring(0, temp.length() - 2));
     }
     /**
      * Determines if composite.
