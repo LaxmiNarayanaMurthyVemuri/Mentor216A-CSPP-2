@@ -23,7 +23,7 @@ public final class Solution {
         int[][] matrix = takingInput(scan);
         int i, j;
         for (i = 0; i < matrix.length; i++) {
-            for (j = 0; j < matrix[0].length-1; j++) {
+            for (j = 0; j < matrix[0].length - 1; j++) {
                 System.out.print(matrix[i][j] + " ");
             }
             System.out.println(matrix[i][j]);
