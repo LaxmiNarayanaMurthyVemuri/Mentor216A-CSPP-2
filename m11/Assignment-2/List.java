@@ -1,153 +1,184 @@
+/**
+ * List of Integers.
+ * @author : MurthyVemuri
+ */
+import java.io.BufferedInputStream;
+import java.io.PrintStream;
 import java.util.Arrays;
-/*
-     * The goal for the list is to store items.
-     * How are we going to store the items in the list?
-     * An array would be good. Right?
-     * So, when we do not what we are going to have in the list
-     * We need to create a Generic list to store the items
-
-     * Here E is a type parameter, and it will be replaced with
-        actual type when the object got created.
-     */
-public class List<E> {
-    private E[] list;
+import java.util.Scanner;
+/**
+ * List of Generic Objects.
+ *
+ * @param      <Matrix>   { parameter_description }
+ */
+public class List<Matrix> {
+    private Matrix[] list;
     private int size;
-    //Constructor
-    public List() {
-        // Create a variable of the type Object[]
-        list = ((E[])new Object[10]);//Object is the base class for all the classes
-        size = 0;
-    }
-    //Overloaded Constructor
-    public List(int param) {
-        list = ((E[])new Object[param]);
-        size = 0;
-    }
-    /* The add method does what the name suggests.
-     * Add a generic type item to the list.
-     * The assumption is to store the item at the end of the list
-     * What is the end of the list?
-     * Is it the same as the end of the array?
-     * Think about how you can use the size variable to add item
-     * to the list.
+    /**
+     * Constructs the object.
      */
-    public void add(E item) {
-        //Inserts the specified element at the end of the list.
-        //You can modify the code in this method.
-        // list[(size++)] = item;
-    }
-    /*Inserts all the elements of specified int
-    array to the end of list*/
-    public void addAll(E[] items) {
-        //Write logic for addAll method
+    public List() {
+        list = (Matrix[])new Object[10];
+        size = 0;
     }
     /**
-     * { function_description }
-     */
-    private void resize(){
-    }
-
-    /*
-     * The size method returns the value of the size.
-     * The purpose of the method is to announce the size of the list
-     * to the objects outside the list
+     * Constructs the object.
      *
-     * The method returns an int. Empty list should return 0.
+     * @param      paramInt  The parameter int
+     */
+    public List(int paramInt) {
+        list = ((Matrix[])new Object[paramInt]);
+        size = 0;
+    }
+    /**
+     * adds element at last.
+     *
+     * @param      paramE  The parameter e
+     */
+    public void add(Matrix paramE) {
+        if (size == list.length) {
+            resize();
+        }
+        list[(size++)] = paramE;
+    }
+    /**
+     * resize list by double.
+     */
+    private void resize() {
+        list = Arrays.copyOf(list, size * 2);
+    }
+    /**
+     * Adds all items.
+     *
+     * @param      paramArrayOfE  The parameter array of e
+     */
+    public void addAll(Matrix[] paramArrayOfE) {
+        for (int i = 0; i < paramArrayOfE.length; i++) {
+           add(paramArrayOfE[i]);
+        }
+    }
+    /**
+     * adds elemenet at particular index.
+     *
+     * @param      paramInt  The parameter int
+     * @param      paramE    The parameter e
+     */
+    public void add(int paramInt, Matrix paramE) {
+        if (paramInt < 0) {
+            System.out.println("Negative Index Exception");
+            return;
+        }
+        if (size == list.length - 1)
+            resize();
+        for (int i = size; i > paramInt; i--)
+            list[i] = list[(i - 1)];
+        list[paramInt] = paramE;
+        size += 1;
+    }
+    /**
+     * returns frequency of given element in the list.
+     *
+     * @param      paramE  The parameter e
+     *
+     * @return     { description_of_the_return_value }
+     */
+    public int count(Matrix paramE) {
+        int count = 0;
+        for (int j = 0; j < size; j++) {
+            if (list[j].equals(paramE)) {
+               count++;
+            }
+        }
+        return count;
+    }
+    /**
+     * returns current size of elements in list.
+     *
+     * @return     { description_of_the_return_value }
      */
     public int size() {
-    	return 0;
+        return size;
     }
-    /*
-     * The remove method does what the name suggests.
-     * Removes a String item, specified by the index argument, from the list
-     * It also does an additional step.
-     * Think about what happens when
-     * an item is removed from the middle of the list
-     * It creates a hole in the list, right?
-     * This would mean, all the items that are
-     * to the right side of the removed item should be
-     * moved to the left by one position.
-     * Here is an example:
-     * array = [1,2,3,0,0,0,0,0,0,0]
-     * remove(1) would remove the item 2 which is at index position 1.
-     * But how do you remove the item from an array?
-     * Well, the way to remove it is to move all
-     * the items, that are to the right of the removed item, to the left
-     * So, the new array looks like this.
-     * array = [1,3,0,0,0,0,0,0,0,0]
-     * The method returns void (nothing)
-     */
-    public void remove(int index) {
-        //Write logic for remove method
-    }
-    /*
-     * Get method has to return the items that is
-     * at the index position passed as an argument to the method.
-     * If the item doesn't exist then return a -1 to indicate that
-     * there is no element at that index.
-     * How can an element not be there at a given position?
-     * Well, if the position is greater than the number of items
-     * in the list then that would mean the item doesn't exist.
-     * How do we check if the position is greater than the
-     * number of items in the list? Would size variable be useful?
-     */
-    public E get(int index) {
-         //Write logic for get method
-        // return list[index];
-        return null;
-    }
-    /*
-     * What happens when you print an object using println?
-     * Java provides a method named toString that is internally
-     * invoked when an object variable is used in println.
-     * For example:
-     * List l = new List();
-     * System.out.println(l);
-     * This statement is a shortcut for
-     * System.out.println(l.toString());
+    /**
+     * removes element at given index.
      *
-     * So, implement the toString method to display the items
-     * in the list in the square brackets notation.
-     * i.e., if the list has numbers 1, 2, 3
-     * return the string [1,2,3]
-     * Caution: The array may be having other elements
-     * Example: [1,2,3,0,0,0,0,0,0,0]
-     * toString should only return the items in the list and
-     * not all the elements of the array.
+     * @param      paramInt  The parameter int
+     */
+    public void remove(int paramInt) {
+        if ((paramInt >= 0) && (paramInt < size)) {
+            for (int i = paramInt; i < size - 1; i++) {
+                list[i] = list[(i + 1)];
+            }
+            size -= 1;
+        } else {
+            System.out.println("Invalid Position Exception");
+        }
+    }
+    /**
+     * returns Object at the given index.
      *
+     * @param      paramInt  The parameter int
+     *
+     * @return     { description_of_the_return_value }
+     */
+    public Matrix get(int paramInt) {
+        if ((paramInt < 0) || (paramInt >= size)) {
+           return null;
+        }
+        return list[paramInt];
+    }
+    /**
+     * Returns a string representation of the object.
+     *
+     * @return     String representation of the object.
      */
     public String toString() {
-
-       return "print the list";
+        if (size == 0)
+            return "[]";
+        StringBuffer localStringBuffer = new StringBuffer("[");
+        int i = 0;
+        for (i = 0; i < size - 1; i++) {
+            localStringBuffer.append(list[i] + ",");
+        }
+        localStringBuffer.append(list[i] + "]");
+        return localStringBuffer.toString();
     }
-    /*
-     * Contains return true if the list has
-     * the item passed as an argument to the method
-     * So, iterate through the list and return true if
-     * the item exists and otherwise false
+    /**
+     * returns true if paramE is in the list.
+     *
+     * @param      paramE  The parameter e
+     *
+     * @return     { description_of_the_return_value }
      */
-    public boolean contains(E item) {
-		//Write logic for contains method
-        return true;
-
+    public boolean contains(Matrix paramE) {
+        return indexOf(paramE) > -1;
     }
-    /*
-     * Returns the index of the first occurrence
-     * of the specified element in this list,
-     * or -1 if this list does not contain the element.
+    /**
+     * Searches for the first match.
+     *
+     * @param      paramE  The parameter e
+     *
+     * @return     { description_of_the_return_value }
      */
-
-    public int indexOf(E item) {
-       //Write logic for indexOf method
+    public int indexOf(Matrix paramE) {
+        for (int i = 0; i < size; i++) {
+        if (list[i].equals(paramE))
+            return i;
+        }
         return -1;
     }
 
-    /* Removes all of its elements that
+        /* Removes all of its elements that
      * are contained in the specified int array.
      */
-    public void removeAll(E[] items)
-    {
-        // write the logic
+    public void removeAll(Matrix[] arr) {
+        for(int i = 0; i < arr.length; i++) {
+            for(int j = 0; j < size; j++) {
+                if(arr[i].equals(list[j])) {
+                    remove(j);
+                }
+            }
+        }
     }
 
     /*Returns a list containing elements, including
@@ -155,20 +186,39 @@ public class List<E> {
      indicates the startIndex and the second parameter
      indicates the endIndex.
      */
-    public List subList(int n, int n2) {
-
-        return null;
+    public List subList(int start, int end) {
+        if (start >= 0 && end >= 0) {
+            if (end == start) {
+                return new List(0);
+            } else if (end > start){
+                List subList = new List(end-start);
+                int j = 0;
+                for (int i = start; i < end; i++ ) {
+                    subList.add(list[i]);
+                }
+                return subList;
+            } else {
+                System.out.println("Index Out of Bounds Exception");
+                return null;
+            }
+        } else {
+            System.out.println("Index Out of Bounds Exception");
+            return null;
+        }
     }
     /*Returns a boolean indicating whether the parameter
       i.e a List object is exactly matching with the given list or not.
      */
-    public boolean equals(List<E> listdata)
-    {
+    public boolean equals(List<Matrix> other) {
+        for (int i = 0; i < this.size() ;i++ ) {
+            if (!other.contains(this.get(i))) {
+                return false;
+            }
+        }
         return true;
     }
     /*Removes all the elements from list*/
-    public void clear()
-    {
-        // write the logic for clear.
+    public void clear() {
+        size = 0;
     }
 }
