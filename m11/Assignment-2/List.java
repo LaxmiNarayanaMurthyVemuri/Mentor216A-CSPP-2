@@ -188,7 +188,9 @@ public class List<Matrix> {
      */
     public List subList(int start, int end) {
         if (start >= 0 && end >= 0) {
-            if (end > start && end > size){
+            if (start == end) {
+            	return new List();
+            } else if (end > start){
                 List subList = new List(end-start);
                 int j = 0;
                 for (int i = start; i < end; i++ ) {
