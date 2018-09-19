@@ -210,8 +210,8 @@ public class List<Matrix> {
       i.e a List object is exactly matching with the given list or not.
      */
     public boolean equals(List<Matrix> other) {
-        for (int i = 0; i < this.size() ;i++ ) {
-            if (!other.contains(this.get(i))) {
+        for (int i = 0; i < other.size() ;i++ ) {
+            if (!this.contains(other.get(i))) {
                 return false;
             }
         }
