@@ -7,7 +7,6 @@ import java.util.Scanner;
  * A program that uses the ADT is called a "client" of the ADT
  * The client typically instantiates an object of the ADT
  * and invokes the public methods on the ADT object.
- *
  * This assignment is to practice the idea of client to the ADT.
  * Client class is Fibonacci and the client needs to use the List ADT
  * to store fibonacci numbers in the List ADT.
